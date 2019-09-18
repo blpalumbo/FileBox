@@ -94,7 +94,7 @@ router.get('/', function (req, res, next) {
 
                         });
                     }
-                    res.render('groupdashboard', { user: sess.user, group: group, file: fileData, notifications: notifications })
+                    res.render('groupdashboard', { title: "FileBox | GroupDashboard", user: sess.user, group: group, file: fileData, notifications: notifications })
                 }
             });
             //res.render('groupdashboard', { user: sess.user, group: group, file: fileData })

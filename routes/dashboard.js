@@ -73,7 +73,7 @@ router.get('/', function (req, res, next) {
 
               });
             }
-            res.render("dashboard", { user: sess.user, file: fileData, notifications: notifications });
+            res.render("dashboard", { title: "FileBox | Dashboard", user: sess.user, file: fileData, notifications: notifications });
           }
         });
 

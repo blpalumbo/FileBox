@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>My Friends | FileBox</title>
+    <link rel="stylesheet" href="/assets/css/styles.scss">
+
+<body>
+    <!-- WRAPPER -->
+    <div id="wrapper">
+        <!-- NAVBAR -->
+        <nav class="navbar-default navbar-fixed-top">
+            <div class="brand" style="float: left">
+                <a href="/dashboard"><img src="IMAGES/logo.png"" alt=" FileBox Logo" class="img-responsive logo"
+                        style="max-height:50px"></a>
+            </div>
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+
+            <div class=" nav navbar-right">
+                <li class="dropdown">
+                    
+                    <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                        <i class="lnr lnr-alarm"></i>
+                        {{#if notifications}}
+                        <span class="badge bg-danger">{{notifications.length}}</span>
+                        {{else}}
+                        
+                        {{/if}}
+                    </a>
+                    <ul class="dropdown-menu notifications">
+                        {{#if notifications}}
+                        {{#each notifications}}
+                        
+                        <li><a href="/friends" class="notification-item"><span
+                                    class="dot bg-success"></span>{{notification}}</a>
+                        </li>
+                        {{/each}}
+                        {{else}}
+                        <li><a href="#" class="notification-item"><span class=""></span>No New Notifications</a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{user.image_name}}"
+                            class="img-circle" alt="Avatar" height="25"> <span>{{user.username}}</span> <i
+                            class="icon-submenu lnr lnr-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/account"><i class="lnr lnr-user"></i> <span>My Account</span></a></li>
+                        <li><a href="/logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                    </ul>
+                </li>
+            </div>
+
+        </nav>
+        <!-- END NAVBAR -->
+        <!-- LEFT SIDEBAR -->
+        <div id="sidebar-nav" class="sidebar">
+            <div class="sidebar-scroll">
+                <nav>
+                    <ul class="nav">
+                        <li><a href="/dashboard" class=""><i class="lnr lnr-inbox"></i> <span>My Files</span></a>
+                        </li>
+                        <li><a href="/groups" class=""><i class="lnr lnr-user"></i> <span>Groups</span></a></li>
+                        <li><a href="/friends" class="active"><i class="lnr lnr-user"></i> <span>Friends</span></a></li>
+                        <li>
+                            <a href="#subPages" data-toggle="collapse" class="collapsed"><i
+                                    class="lnr lnr-file-empty"></i> <span>Pages</span> <i
+                                    class="icon-submenu lnr lnr-chevron-left"></i></a>
+                            <div id="subPages" class="collapse ">
+                                <ul class="nav">
+                                    <li><a href="/dashboard" class="">Dashboard</a></li>
+                                    <li><a href="/groups" class="">Groups</a></li>
+                                    <li><a href="/friends" class="">Friends</a></li>
+                                    <li><a href="/account" class="">Account</a></li>
+                                    <li><a href="/login" class="">Login</a></li>
+                                    <li><a href="/register" class="">Register</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="login/" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- END LEFT SIDEBAR -->
+        <!-- MAIN -->
+        <div class="main">
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <!-- FRIENDS -->
+                <div id="FilesDiv" class="container-fluid">
+                    <!-- OVERVIEW -->
+                    <div class="panel panel-headline">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">My Friends</h3>
+                            <p class="panel-subtitle">People You've Added to Your Personal Friends List</p>
+                        </div>
+                        <br />
+                        <form method="POST" action='friends/SendFriendRequest' style="padding:25px;">
+                            <input type="text" name="username" id="username" value="" class="form-control addFriendsBtn"
+                                placeholder="enter a friends username" required>
+                            <span class="input-group-btn"><button type="submit" class="btn btn-primary">Add
+                                    Friend</button></span>
+                        </form>
+                        <div style="position: relative; padding:25px;">
+                            {{#if errmessage}}
+                            <label class="text text-danger">{{errmessage}}</label>
+                            {{/if}}
+                            {{#if successmessage}}
+                            <label class="text text-success">{{successmessage}}</label>
+                            {{/if}}
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-body">
+                        <!-- ADD FRIEND FORM  -->
+                        <div class="col-md-12">
+                            <div class="people-nearby">
+
+                                <div class="container--tabs">
+
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab-1">My Friends</a></li>
+                                        <li class=""><a href="#tab-2">Friend Requests Received
+                                                {{# if receivedFriendRequests}} <span
+                                                    class="badge bg-danger">{{receivedFriendRequests.length}}</span>{{/if}}
+
+                                            </a></li>
+                                        <li class=""><a href="#tab-3">Friend Requests Sent</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <br />
+
+
+                                        <!-- My Friends -->
+                                        <div id="tab-1" class="tab-pane active">
+                                            {{#if friends}}
+                                            {{#each friends}}
+                                            <div class="nearby-user">
+                                                <div class="row">
+                                                    <div class="col-md-2 col-sm-2">
+                                                        <img src="{{UserSentImageName}}" alt="user image"
+                                                            class="profile-photo-lg">
+                                                    </div>
+                                                    <div class="col-md-7 col-sm-7">
+                                                        <h5>{{UserSentUname}}</h5>
+
+                                                        <p class="text-muted">{{UserSentEmail}}</p>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <form method="POST" action="friends/deleteFriend">
+                                                            <input type="hidden" name="UserFriendID"
+                                                                value="{{UserFriendID}}">
+
+                                                            <button type="submit"
+                                                                class="btn btn-danger pull-right"><strong>Remove</strong>
+                                                                {{UserSentUname}}
+                                                                From Your Friends List</button>&emsp;
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                            {{else}}
+                                            <p class="panel-subtitle">You Currently Do Not Have any Friends D:
+                                            </p>
+                                            {{/if}}
+                                        </div>
+
+
+                                        <!-- Friend Requests Received -->
+                                        <div id="tab-2" class="tab-pane">
+                                            {{#if receivedFriendRequests}}
+                                            {{#each receivedFriendRequests}}
+                                            <div class="nearby-user">
+                                                <div class="row">
+                                                    <div class="col-md-2 col-sm-2">
+                                                        <img src="{{UserSentImageName}}" alt="user"
+                                                            class="profile-photo-lg">
+                                                    </div>
+                                                    <div class="col-md-7 col-sm-7">
+                                                        <h5>{{UserSentUname}}</h5>
+                                                        <p class="text-muted">{{UserSentEmail}}</p>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-6">
+                                                        <form method="POST" action="friends/acceptRequest">
+                                                            <input type="hidden" name="FriendRequestID"
+                                                                value="{{FriendRequestID}}">
+                                                            <input type="hidden" name="UserSentID"
+                                                                value="{{UserSentID}}">
+                                                            <input type="hidden" name="UserSentUname"
+                                                                value="{{UserSentUname}}">
+                                                            <input type="hidden" name="UserSentEmail"
+                                                                value="{{UserSentEmail}}">
+                                                            <input type="hidden" name="UserSentImageName"
+                                                                value="{{UserSentImageName}}">
+                                                            <input type="hidden" name="UserSentFirstName"
+                                                                value="{{UserSentFirstName}}">
+                                                            <input type="hidden" name="UserSentLastName"
+                                                                value="{{UserSentLastName}}">
+                                                            <input type="hidden" name="UserReceivedID"
+                                                                value="{{UserReceivedID}}">
+                                                            <input type="hidden" name="UserReceivedUname"
+                                                                value="{{UserReceivedUname}}">
+                                                            <input type="hidden" name="UserReceivedEmail"
+                                                                value="{{UserReceivedEmail}}">
+                                                            <input type="hidden" name="UserReceivedImageName"
+                                                                value="{{UserReceivedImageName}}">
+                                                            <input type="hidden" name="UserReceivedFirstName"
+                                                                value="{{UserReceivedFirstName}}">
+                                                            <input type="hidden" name="UserReceivedLastName"
+                                                                value="{{UserReceivedLastName}}">
+                                                            <button type="submit"
+                                                                class="btn btn-primary pull-right"><strong>Accept</strong>
+                                                                {{UserSentUname}}'s'
+                                                                Request</button>&emsp;
+                                                        </form>
+                                                        <br />
+                                                        <form method="POST" action="friends/cancelRequest">
+                                                            <input type="hidden" name="FriendRequestID"
+                                                                value="{{FriendRequestID}}">
+
+                                                            <button type="submit"
+                                                                class="btn btn-danger pull-right"><strong>Delete</strong>
+                                                                {{UserSentUname}}'s'
+                                                                Request</button>&emsp;
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                            {{else}}
+                                            <p class="panel-subtitle">You Currently Do Not Have any Friend Requests :(
+                                            </p>
+                                            {{/if}}
+                                        </div>
+
+
+                                        <!-- Friend Requests Sent -->
+                                        <div id="tab-3" class="tab-pane">
+                                            {{#if sentFriendRequest}}
+                                            {{#each sentFriendRequest}}
+                                            <div class="nearby-user">
+                                                <div class="row">
+                                                    <div class="col-md-2 col-sm-2">
+                                                        <img src="{{UserReceivedImageName}}" alt="user"
+                                                            class="profile-photo-lg">
+                                                    </div>
+                                                    <div class="col-md-7 col-sm-7">
+                                                        <h5>{{UserReceivedUname}}</h5>
+                                                        <p class="text-muted">{{UserReceivedEmail}}</p>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <form method="POST" action="friends/cancelRequest">
+                                                            <input type="hidden" name="FriendRequestID"
+                                                                value="{{FriendRequestID}}">
+
+                                                            <button type="submit"
+                                                                class="btn btn-danger pull-right">Cancel
+                                                                Request</button>&emsp;
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                            {{else}}
+                                            <p class="panel-subtitle">You Currently Do Not Have any Sent Friend Requests
+                                            </p>
+                                            {{/if}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- END FRIENDS -->
+            <!-- END MAIN CONTENT -->
+        </div>
+        <!-- END MAIN -->
+        <div class="clearfix"></div>
+        <footer>
+            <div class="container-fluid">
+                <p class="copyright">&copy;Brandon Palumbo, Patrick Asciola 2019</p>
+            </div>
+        </footer>
+    </div>
+    <!-- END WRAPPER -->
+    <!-- Javascript -->
+    <script>
+        window.addEventListener("load", function () {
+            // store tabs variable
+            var myTabs = document.querySelectorAll("ul.nav-tabs > li");
+            function myTabClicks(tabClickEvent) {
+                for (var i = 0; i < myTabs.length; i++) {
+                    myTabs[i].classList.remove("active");
+                }
+                var clickedTab = tabClickEvent.currentTarget;
+                clickedTab.classList.add("active");
+                tabClickEvent.preventDefault();
+                var myContentPanes = document.querySelectorAll(".tab-pane");
+                for (i = 0; i < myContentPanes.length; i++) {
+                    myContentPanes[i].classList.remove("active");
+                }
+                var anchorReference = tabClickEvent.target;
+                var activePaneId = anchorReference.getAttribute("href");
+                var activePane = document.querySelector(activePaneId);
+                activePane.classList.add("active");
+            }
+            for (i = 0; i < myTabs.length; i++) {
+                myTabs[i].addEventListener("click", myTabClicks)
+            }
+        });
+
+    </script>
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/scripts/klorofil-common.js"></script>
+</body>
+
+</html>

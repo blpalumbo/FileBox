@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FileBox - Landing Page</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-default navbar-fixed-top" align="left">
+            <div class="brand">
+                <img src="/IMAGES/logo.png"" alt=" FileBox Logo" class="img-responsive logo"
+                    style="max-height:50px;float: left;">
+            </div>
+        </nav>
+        <div class="ActionsDiv" align="center">
+            <form class="" id="LoginForm" action="login/submit" method="POST">
+                <h3>Login</h3>
+                <input type="text" placeholder="username" class="form-control textBox" id='username' name="username"
+                    required>
+                <br />
+                <input type="password" placeholder="password" class="form-control textBox" id='pw' name="pw" required>
+                <br />
+                <button type="submit" class="btn btn-primary actionBtn">Login</button>
+            </form>
+            <br />
+            <a href="/register">Not a member? Click here to register</a>
+            <br /><br />
+            <label class="text text-danger">{{resulterrmsg}}</label>
+            <label class="text text-success">{{resultsuccessmsg}}</label>
+        </div>
+    </div>
+</body>
+
+</html>

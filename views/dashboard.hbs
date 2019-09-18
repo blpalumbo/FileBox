@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Dashboard | FileBox</title>
+</head>
+
+<body>
+    <!-- WRAPPER -->
+    <div id="wrapper">
+        <!-- NAVBAR -->
+        <nav class="navbar-default navbar-fixed-top">
+            <div class="brand" style="float: left">
+                <a href="/dashboard"><img src="IMAGES/logo.png"" alt=" FileBox Logo" class="img-responsive logo"
+                        style="max-height:50px"></a>
+            </div>
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+            <div class=" nav navbar-right">
+                <li class="dropdown">
+
+                    <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                        <i class="lnr lnr-alarm"></i>
+                        {{#if notifications}}
+                        <span class="badge bg-danger">{{notifications.length}}</span>
+                        {{else}}
+
+                        {{/if}}
+                    </a>
+                    <ul class="dropdown-menu notifications">
+                        {{#if notifications}}
+                        {{#each notifications}}
+
+                        <li><a href="/friends" class="notification-item"><span
+                                    class="dot bg-success"></span>{{notification}}</a>
+                        </li>
+
+                        {{/each}}
+                        {{else}}
+                        <li><a href="#" class="notification-item"><span class=""></span>No New Notifications</a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{user.image_name}}"
+                            class="img-circle" alt="Avatar" height="25"> <span>{{user.username}}</span> <i
+                            class="icon-submenu lnr lnr-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/account"><i class="lnr lnr-user"></i> <span>My Account</span></a></li>
+                        <li><a href="/logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                    </ul>
+                </li>
+            </div>
+
+        </nav>
+        <!-- END NAVBAR -->
+        <!-- LEFT SIDEBAR -->
+        <div id="sidebar-nav" class="sidebar">
+            <div class="sidebar-scroll">
+                <nav>
+                    <ul class="nav">
+                        <li><a href="/dashboard" class="active"><i class="lnr lnr-inbox"></i> <span>My Files</span></a>
+                        </li>
+                        <li><a href="/groups" class=""><i class="lnr lnr-user"></i> <span>Groups</span></a></li>
+                        <li><a href="/friends" class=""><i class="lnr lnr-user"></i> <span>Friends</span></a></li>
+                        <li>
+                            <a href="#subPages" data-toggle="collapse" class="collapsed"><i
+                                    class="lnr lnr-file-empty"></i> <span>Pages</span> <i
+                                    class="icon-submenu lnr lnr-chevron-left"></i></a>
+                            <div id="subPages" class="collapse ">
+                                <ul class="nav">
+                                    <li><a href="/dashboard" class="">Dashboard</a></li>
+                                    <li><a href="/groups" class="">Groups</a></li>
+                                    <li><a href="/friends" class="">Friends</a></li>
+                                    <li><a href="/account" class="">Account</a></li>
+                                    <li><a href="/login" class="">Login</a></li>
+                                    <li><a href="/register" class="">Register</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="/logout" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- END LEFT SIDEBAR -->
+        <!-- MAIN -->
+        <div class="main">
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+
+                <!-- FILES -->
+                <div id="FilesDiv" class="container-fluid">
+                    <!-- OVERVIEW -->
+                    <div class="panel panel-headline">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">My Files</h3>
+                            <p class="panel-subtitle">Manage your personal files within the dashboard. Files displayed
+                                below are all of your files, and files that have been shared with you</p>
+                        </div>
+                    </div>
+
+                    <div class=" panel panel-body">
+                        <div id="progress" class="progressBar">
+
+                        </div>
+                        <div class="upload-btn-wrapper">
+                            <button class="btn-upload">Upload a file</button>
+                            <input type="file" name="file-input" id="file-input" />
+                        </div>
+
+                        <!-- XHR Request For Uploading Files to Amazon S3 Buckets, Via Button and File Input Above ^^^ -->
+                        <script>
+                            (() => {
+                                document.getElementById("file-input").onchange = () => {
+                                    const files = document.getElementById('file-input').files;
+                                    const file = files[0];
+                                    if (file == null) {
+                                        return alert('No file selected.');
+                                    }
+                                    getSignedRequest(file);
+                                };
+                            })();
+
+                            function getSignedRequest(file) {
+                                const xhr = new XMLHttpRequest();
+                                xhr.open('GET', `dashboard/upload?file-name=${file.name}&file-type=${file.type}`);
+                                xhr.setRequestHeader("Access-Control-Allow-Origin", '*');
+                                xhr.onreadystatechange = () => {
+
+                                    if (xhr.readyState === 4) {
+                                        var o = document.getElementById('progress')
+                                        var progress = o.appendChild(document.createElement("p"));
+                                        progress.appendChild(document.createTextNode("UPLOADING: " + file.name + file.type + "............"));
+
+                                        if (xhr.status === 200) {
+                                            const response = JSON.parse(xhr.responseText);
+                                            uploadFile(file, response.signedRequest, response.url);
+                                        }
+                                        else {
+                                            alert('Could not get a signed URL, perhaps you are signed out?');
+                                        }
+                                    }
+                                };
+                                xhr.send();
+                            }
+
+                            function uploadFile(file, signedRequest, url) {
+                                const xhr = new XMLHttpRequest();
+                                console.log(signedRequest)
+                                xhr.open('PUT', signedRequest);
+                                xhr.onreadystatechange = () => {
+
+
+                                    if (xhr.readyState === 4) {
+                                        if (xhr.status === 200) {
+                                            alert('Success: File Uploaded');
+                                            location.reload();
+                                        }
+                                        else {
+                                            alert('Could not upload file.');
+                                        }
+                                    }
+                                };
+                                xhr.send(file);
+                            }
+                        </script>
+
+                        <br /><br />
+
+                        <!-- For Each File, Create This Code Block, HBS Helpers  -->
+                        {{#if file}}
+                        {{#each file}}
+                        <div class="row file-row">
+                            <div class="col-sm-12">
+                                <div class="metric">
+                                    <span class="lnr lnr-file-empty"></span>&nbsp;
+                                    <strong><span class="title"></span>Filename:</span></strong>&nbsp;<span
+                                        class="title"><a
+                                            href="https://filebox-file-storage.s3.amazonaws.com/{{Key}}">{{Key}}</a></span>&emsp;
+                                    <span class="lnr lnr-file-empty"></span>&nbsp;
+                                    <strong><span class="title">Size:</span></strong>&nbsp;<span
+                                        class="title">{{Size}}</span>&emsp;
+                                    <span class="lnr lnr-clock"></span>&nbsp;
+                                    <strong><span class="title">Last Modified:</span></strong>&nbsp;<span
+                                        class="title">{{LastModified}}</span>&emsp;
+                                    <div style="float:right; display: inline-block">
+
+                                        <form method="POST" action="dashboard/download" style=" display: inline-block">
+                                            <input type="hidden" value="{{Key}}" name="fileKey">
+                                            <button title="download"
+                                                class="lnr lnr-download btn btn-success a a-btn"></button>
+
+                                        </form>
+                                        <form method="POST" action="dashboard/delete" style=" display: inline-block">
+                                            <input type="hidden" value="{{Key}}" name="fileKey">
+                                            <button type="" title="delete"
+                                                class="lnr lnr-trash btn btn-danger a a-btn"></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{else}}
+                        <p class="panel-subtitle">You Currently Do Not Files, Click The Upload Button Above and Begin
+                            Today!</p>
+                        {{/if}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">&copy;Brandon Palumbo, Patrick Asciola 2019</p>
+        </div>
+    </footer>
+    </div>
+    <!-- END WRAPPER -->
+    <!-- Javascript -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/scripts/klorofil-common.js"></script>
+</body>

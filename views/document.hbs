@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Groups | FileBox</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/demo.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="IMAGES/favicon.png">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- WRAPPER -->
+    <div id="wrapper">
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="brand">
+                <a href="dashboard.html"><img src="IMAGES/logo.png"" alt=" FileBox Logo" class="img-responsive logo"
+                        style="max-height:50px"></a>
+            </div>
+            <div class="container-fluid">
+                <div class="navbar-btn">
+                    <button type="button" class="btn-toggle-fullwidth"><i
+                            class="lnr lnr-arrow-left-circle"></i></button>
+                </div>
+                <div id="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                <i class="lnr lnr-alarm"></i>
+                                <span class="badge bg-danger">5</span>
+                            </a>
+                            <ul class="dropdown-menu notifications">
+                                <li><a href="#" class="notification-item"><span
+                                            class="dot bg-warning"></span>[Notification]</a></li>
+                                <li><a href="#" class="notification-item"><span
+                                            class="dot bg-danger"></span>[Notification]</a></li>
+                                <li><a href="#" class="notification-item"><span
+                                            class="dot bg-success"></span>[Notification]</a></li>
+                                <li><a href="#" class="notification-item"><span
+                                            class="dot bg-warning"></span>[Notification]</a></li>
+                                <li><a href="#" class="notification-item"><span
+                                            class="dot bg-success"></span>[Notification]</a></li>
+                                <li><a href="#" class="more">See all notifications</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                    class="lnr lnr-question-circle"></i> <span>Help</span> <i
+                                    class="icon-submenu lnr lnr-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Uploading Files</a></li>
+                                <li><a href="#">File Management</a></li>
+                                <li><a href="#">Messaging Friends</a></li>
+                                <li><a href="#">Editing with Friends</a></li>
+                                <li><a href="#">FAQ</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="IMAGES/userImage.jpg"
+                                    class="img-circle" alt="Avatar"> <span>Brandon</span> <i
+                                    class="icon-submenu lnr lnr-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="account.html"><i class="lnr lnr-user"></i> <span>My Account</span></a></li>
+                                <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message a Friend</span></a></li>
+                                <li><a href="login.html"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- END NAVBAR -->
+        <!-- LEFT SIDEBAR -->
+        <div id="sidebar-nav" class="sidebar">
+            <div class="sidebar-scroll">
+                <nav>
+                    <ul class="nav">
+                        <li><a href="dashboard.html" class="active"><i
+                                    class="lnr lnr-home"></i><span>Dashboard</span></a></li>
+                        <li><a href="dashboard.html" class=""><i class="lnr lnr-inbox"></i> <span>My Files</span></a>
+                        </li>
+                        <li><a href="dashboard.html" class=""><i class="lnr lnr-inbox"></i> <span>Shared With
+                                    Me</span></a></li>
+                        <li><a href="groups.html" class=""><i class="lnr lnr-user"></i> <span>Groups</span></a></li>
+                        <li><a href="friends.html" class=""><i class="lnr lnr-user"></i> <span>Friends</span></a></li>
+                        <li><a href="dashboard.html" class=""><i class="lnr lnr-bubble"></i> <span>My
+                                    Messages</span></a></li>
+                        <li>
+                            <a href="#subPages" data-toggle="collapse" class="collapsed"><i
+                                    class="lnr lnr-file-empty"></i> <span>Pages</span> <i
+                                    class="icon-submenu lnr lnr-chevron-left"></i></a>
+                            <div id="subPages" class="collapse ">
+                                <ul class="nav">
+                                    <li><a href="dashboard.html" class="">Dashboard</a></li>
+                                    <li><a href="groups.html" class="">Groups</a></li>
+                                    <li><a href="friends.html" class="">Friends</a></li>
+                                    <li><a href="account.html" class="">Account</a></li>
+                                    <li><a href="login.html" class="">Login</a></li>
+                                    <li><a href="login.html" class="">Register</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="login.html" class=""><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- END LEFT SIDEBAR -->
+        <!-- MAIN -->
+        <div class="main">
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <!-- FILES -->
+                <div id="FilesDiv" class="container-fluid">
+                    <!-- OVERVIEW -->
+                    <div class="panel panel-headline">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Document</h3>
+                            <p class="panel-subtitle">Edit a Document Within this Page</p>
+                        </div>
+                        <div class="panel-body">
+                            <div id="editor">
+                                <h1>Nam ante Aristippus, et ille melius.</h1>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo nostrum istius generis
+                                    asotos iucunde putat vivere. Duo Reges: constructio interrete. Cetera illa
+                                    adhibebat, quibus demptis negat se Epicurus intellegere quid sit bonum. <b>Iam id
+                                        ipsum absurdum, maximum malum neglegi.</b> Cur igitur, inquam, res tam
+                                    dissimiles eodem nomine appellas? Et quidem iure fortasse, sed tamen non gravissimum
+                                    est testimonium multitudinis. <a href="http://loripsum.net/" target="_blank">Nonne
+                                        igitur tibi videntur, inquit, mala?</a> Septem autem illi non suo, sed populorum
+                                    suffragio omnium nominati sunt. </p>
+
+                                <dl>
+                                    <dt><dfn>Ut pulsi recurrant?</dfn></dt>
+                                    <dd>Id enim volumus, id contendimus, ut officii fructus sit ipsum officium.</dd>
+                                    <dt><dfn>In schola desinis.</dfn></dt>
+                                    <dd>An me, inquam, nisi te audire vellem, censes haec dicturum fuisse?</dd>
+                                    <dt><dfn>Hic ambiguo ludimur.</dfn></dt>
+                                    <dd>Conferam avum tuum Drusum cum C.</dd>
+                                    <dt><dfn>Nulla erit controversia.</dfn></dt>
+                                    <dd>Hoc mihi cum tuo fratre convenit.</dd>
+                                </dl>
+
+                                <h2>Quonam modo?</h2>
+
+                                <p>In his igitur partibus duabus nihil erat, quod Zeno commutare gestiret. Eam si
+                                    varietatem diceres, intellegerem, ut etiam non dicente te intellego; <a
+                                        href="http://loripsum.net/" target="_blank">Deprehensus omnem poenam
+                                        contemnet.</a> Quae fere omnia appellantur uno ingenii nomine, easque virtutes
+                                    qui habent, ingeniosi vocantur. Cuius similitudine perspecta in formarum specie ac
+                                    dignitate transitum est ad honestatem dictorum atque factorum. Tollitur beneficium,
+                                    tollitur gratia, quae sunt vincla concordiae. <mark>Negare non possum.</mark> Nec
+                                    enim, dum metuit, iustus est, et certe, si metuere destiterit, non erit; </p>
+
+                                <ul>
+                                    <li>Eaedem res maneant alio modo.</li>
+                                    <li>Itaque e contrario moderati aequabilesque habitus, affectiones ususque corporis
+                                        apti esse ad naturam videntur.</li>
+                                    <li>Quid ergo dubitamus, quin, si non dolere voluptas sit summa, non esse in
+                                        voluptate dolor sit maximus?</li>
+                                    <li>Vestri haec verecundius, illi fortasse constantius.</li>
+                                </ul>
+
+                                <p>An vero, inquit, quisquam potest probare, quod perceptfum, quod. <mark>Sed haec
+                                        omittamus;</mark> Ex quo, id quod omnes expetunt, beate vivendi ratio inveniri
+                                    et comparari potest. Non quam nostram quidem, inquit Pomponius iocans; Quae cum
+                                    dixisset paulumque institisset, Quid est? Id enim volumus, id contendimus, ut
+                                    officii fructus sit ipsum officium. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT -->
+        </div>
+        <!-- END MAIN -->
+        <div class="clearfix"></div>
+        <footer>
+            <div class="container-fluid">
+                <p class="copyright">&copy;Brandon Palumbo, Patrick Asciola 2019</p>
+            </div>
+        </footer>
+    </div>
+    <!-- END WRAPPER -->
+    <!-- Javascript -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/scripts/klorofil-common.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+    </script>
+</body>
+
+</html>

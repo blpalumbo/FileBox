@@ -1,0 +1,23 @@
+body{
+    padding: 10px;
+}
+html{
+    padding: 10px;
+}
+.textBox{
+   max-width:300px;
+}
+.ActionsDiv{
+    padding-top: 100px;
+    width:auto;
+    min-width: 20%;
+}
+.actionBtn{
+    width:150px;
+}
+#logoText{
+    color:white;
+}
+.nav{
+    width: auto
+}

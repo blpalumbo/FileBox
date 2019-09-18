@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FileBox | Registry</title>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="brand">
+            <img src="../IMAGES/logo.png"" alt=" FileBox Logo" class="img-responsive logo"
+                style="max-height:50px;float: left;">
+        </div>
+    </nav>
+    <div id="wrapper">
+        <div class="ActionsDiv" align="center">
+            <form class="" id="LoginForm" action="register" method="POST">
+                <h3>Register</h3>
+                <input type="text" placeholder="username" class="form-control textBox" id='username' name="username" required>
+                <br />
+                <input type="text" placeholder="email address" class="form-control textBox" id='email' name="email" required>
+                <br />
+                <input type="password" placeholder="password" class="form-control textBox" id='pw' name="pw" required>
+                <br />
+                <input type="password" placeholder="confirm password" class="form-control textBox" id='conf_pw' name="conf_pw"
+                    required>
+                <br />
+                <button type="submit" class="btn btn-primary actionBtn">Register</button>
+            </form>
+            <br />
+            <a href="/login">Login</a>
+            <br /><br />
+            <label class="text text-danger">{{resulterrmsg}}</label>
+            <label class="text text-success">{{resultsuccessmsg}}</label>
+            
+        </div>
+    </div>
+</body>
+
+</html>
